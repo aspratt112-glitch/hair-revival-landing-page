@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Unna:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
   <style>
     /* ── Brand Tokens ── */
     :root {
@@ -192,9 +193,7 @@
       text-transform: uppercase;
       color: var(--terra-rust);
     }
-    .tagline__divider {
-      display: none;
-    }
+    .tagline__divider { display: none; }
 
     /* ── Form Panel ── */
     .form-panel {
@@ -233,72 +232,19 @@
       margin-bottom: 28px;
     }
 
-    .form { display: flex; flex-direction: column; gap: 1px; }
-
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
-
-    .field {
-      position: relative;
-      background: rgba(212,224,224,0.03);
-      border: 1px solid rgba(70,96,96,0.25);
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-    .row .field { border: none; background: rgba(212,224,224,0.03); }
-    .field--full { border-top: none; }
-    .field:focus-within { background: rgba(70,96,96,0.10); z-index: 1; }
-
-    .field__label {
-      position: absolute; top: 15px; left: 16px;
-      font-family: 'Poppins', sans-serif; font-weight: 500;
-      font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(138,172,172,0.5); pointer-events: none;
-      transition: top 0.18s ease, font-size 0.18s ease, color 0.18s ease;
-    }
-    .field__input {
-      width: 100%; background: transparent; border: none; outline: none;
-      padding: 28px 16px 11px;
-      font-family: 'Poppins', sans-serif; font-weight: 300;
-      font-size: 14px; color: var(--mist);
-    }
-    .field__input::placeholder { color: transparent; }
-    .field__input:focus          ~ .field__label,
-    .field__input:not(:placeholder-shown) ~ .field__label {
-      top: 8px; font-size: 7.5px; color: var(--teal-forest);
-    }
-
-    /* Wrap the field group in a subtle outer border */
-    .field-group {
-      border: 1px solid rgba(70,96,96,0.25);
-      display: flex; flex-direction: column; gap: 1px;
-      background: rgba(70,96,96,0.25);
-      overflow: hidden;
-    }
-    .field-group .row { gap: 1px; }
-    .field-group .field { border: none; }
-    .field-group .field--full { border-top: none; }
-
-    /* Terra Rust focus indicator */
-    .field::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 1px; background: var(--terra-rust);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-    .field:focus-within::after { transform: scaleX(1); }
-
-    /* ── Checkbox ── */
-    .checkbox-label {
+    /* ── Marketing Consent Checkbox ── */
+    .hr-checkbox-label {
       display: flex; align-items: center; gap: 12px;
       margin-top: 16px; cursor: pointer;
     }
-    .checkbox-input { display: none; }
-    .checkbox-custom {
+    .hr-checkbox-input { display: none; }
+    .hr-checkbox-custom {
       width: 16px; height: 16px; flex-shrink: 0;
       border: 1px solid rgba(70,96,96,0.5);
       background: rgba(212,224,224,0.03);
       position: relative; transition: border-color 0.2s ease, background 0.2s ease;
     }
-    .checkbox-custom::after {
+    .hr-checkbox-custom::after {
       content: '';
       position: absolute; top: 2px; left: 5px;
       width: 4px; height: 8px;
@@ -307,58 +253,16 @@
       transform: rotate(45deg) scale(0);
       transition: transform 0.15s ease;
     }
-    .checkbox-input:checked ~ .checkbox-custom {
+    .hr-checkbox-input:checked ~ .hr-checkbox-custom {
       background: var(--terra-rust);
       border-color: var(--terra-rust);
     }
-    .checkbox-input:checked ~ .checkbox-custom::after {
+    .hr-checkbox-input:checked ~ .hr-checkbox-custom::after {
       transform: rotate(45deg) scale(1);
     }
-    .checkbox-text {
+    .hr-checkbox-text {
       font-family: 'Poppins', sans-serif; font-weight: 300;
       font-size: 11px; color: var(--text-support); line-height: 1.4;
-    }
-
-    /* ── CTA ── */
-    .btn {
-      width: 100%; padding: 18px 24px; margin-top: 16px;
-      background: var(--terra-rust); border: none; cursor: pointer;
-      font-family: 'Poppins', sans-serif; font-weight: 500;
-      font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--mist);
-      position: relative; overflow: hidden;
-      transition: background 0.3s ease, letter-spacing 0.3s ease;
-      box-shadow: 0 4px 24px rgba(177,70,46,0.3);
-    }
-    .btn::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(212,224,224,0.12), transparent);
-      transition: left 0.55s ease;
-    }
-    .btn:hover { background: #c44f35; letter-spacing: 0.32em; }
-    .btn:hover::before { left: 100%; }
-    .btn:active { transform: scale(0.99); }
-
-    /* ── Success ── */
-    .success {
-      display: none;
-      flex-direction: column; align-items: center; gap: 18px;
-      text-align: center;
-    }
-    .success.active { display: flex; }
-
-    .success__icon { width: 50px; height: 50px; }
-
-    .success__title {
-      font-family: 'Lora', serif;
-      font-weight: 700; font-size: 26px; letter-spacing: -0.02em;
-      color: var(--mist);
-    }
-    .success__rule { width: 36px; height: 1px; background: var(--border); }
-    .success__body {
-      font-family: 'Lora', serif;
-      font-size: 16px; font-style: italic; font-weight: 400;
-      color: var(--text-support); line-height: 1.7;
     }
 
     /* ── Footer ── */
@@ -388,15 +292,157 @@
       .corner--tr { top: 16px; right: 16px; }
       .corner--bl { bottom: 16px; left: 16px; }
       .corner--br { bottom: 16px; right: 16px; }
-
       .form-panel { padding: 28px 20px 24px; }
-
-      .row { grid-template-columns: 1fr; }
-      .row .field:first-child {
-        border-right-color: var(--border-dim);
-        border-bottom-color: transparent;
-      }
+      .mc-name-row { grid-template-columns: 1fr !important; }
     }
+
+    /* ══════════════════════════════════════════
+       Mailchimp Form Overrides — Hair Revival
+    ══════════════════════════════════════════ */
+    #mc_embed_shell { width: 100%; }
+
+    #mc_embed_signup {
+      background: transparent !important;
+      width: 100% !important;
+      font-family: 'Poppins', sans-serif !important;
+      padding: 0 !important;
+      clear: none !important;
+      float: none !important;
+    }
+
+    /* Hide default Mailchimp "Subscribe" heading — we use our own */
+    #mc_embed_signup h2 { display: none !important; }
+
+    /* "* indicates required" */
+    #mc_embed_signup .indicates-required {
+      font-family: 'Poppins', sans-serif !important;
+      font-size: 9.5px !important;
+      letter-spacing: 0.10em !important;
+      color: var(--text-dim) !important;
+      margin: 0 0 16px !important;
+      text-align: right !important;
+    }
+    #mc_embed_signup .indicates-required .asterisk,
+    #mc_embed_signup .mc-field-group label .asterisk {
+      color: var(--terra-rust) !important;
+    }
+
+    /* Field groups */
+    #mc_embed_signup .mc-field-group {
+      width: 100% !important;
+      padding-bottom: 0 !important;
+      min-height: unset !important;
+      margin-bottom: 12px !important;
+    }
+
+    /* Labels */
+    #mc_embed_signup .mc-field-group label {
+      font-family: 'Poppins', sans-serif !important;
+      font-size: 8.5px !important;
+      letter-spacing: 0.18em !important;
+      text-transform: uppercase !important;
+      color: rgba(138,172,172,0.55) !important;
+      font-weight: 500 !important;
+      display: block !important;
+      margin-bottom: 7px !important;
+    }
+
+    /* Inputs */
+    #mc_embed_signup .mc-field-group input[type="email"],
+    #mc_embed_signup .mc-field-group input[type="text"] {
+      width: 100% !important;
+      background: rgba(212,224,224,0.03) !important;
+      border: 1px solid rgba(70,96,96,0.30) !important;
+      border-radius: 0 !important;
+      padding: 12px 16px !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-size: 13.5px !important;
+      font-weight: 300 !important;
+      color: var(--mist) !important;
+      outline: none !important;
+      box-shadow: none !important;
+      height: auto !important;
+      -webkit-appearance: none !important;
+      transition: border-color 0.2s ease, background 0.2s ease !important;
+    }
+    #mc_embed_signup .mc-field-group input[type="email"]:focus,
+    #mc_embed_signup .mc-field-group input[type="text"]:focus {
+      border-color: var(--terra-rust) !important;
+      background: rgba(70,96,96,0.10) !important;
+    }
+    #mc_embed_signup .mc-field-group input::placeholder {
+      color: rgba(138,172,172,0.20) !important;
+    }
+
+    /* First Name / Last Name: side by side */
+    .mc-name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .mc-name-row .mc-field-group { margin-bottom: 0 !important; }
+
+    /* Subscribe / Register button */
+    #mc_embed_signup .clear {
+      width: 100% !important;
+      float: none !important;
+      margin-top: 16px !important;
+    }
+    #mc_embed_signup .clear input#mc-embedded-subscribe {
+      background: var(--terra-rust) !important;
+      border: none !important;
+      border-radius: 0 !important;
+      width: 100% !important;
+      padding: 17px 24px !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-weight: 500 !important;
+      font-size: 10px !important;
+      letter-spacing: 0.26em !important;
+      text-transform: uppercase !important;
+      color: var(--mist) !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 24px rgba(177,70,46,0.28) !important;
+      margin: 0 !important;
+      height: auto !important;
+      display: block !important;
+      transition: background 0.2s ease, letter-spacing 0.2s ease !important;
+    }
+    #mc_embed_signup .clear input#mc-embedded-subscribe:hover {
+      background: #c44f35 !important;
+      letter-spacing: 0.32em !important;
+    }
+
+    /* Mailchimp error / success responses */
+    #mc_embed_signup div#mce-responses {
+      float: none !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+    #mc_embed_signup div.response {
+      font-family: 'Poppins', sans-serif !important;
+      font-size: 11px !important;
+      letter-spacing: 0.06em !important;
+      padding: 12px 16px !important;
+      margin: 10px 0 0 !important;
+      float: none !important;
+      width: 100% !important;
+      border-radius: 0 !important;
+    }
+    #mc_embed_signup div#mce-error-response {
+      background: rgba(177,70,46,0.10) !important;
+      border-left: 2px solid var(--terra-rust) !important;
+      color: #e8a090 !important;
+    }
+    #mc_embed_signup div#mce-success-response {
+      background: rgba(70,96,96,0.15) !important;
+      border-left: 2px solid var(--teal-forest) !important;
+      color: var(--mist) !important;
+    }
+
+    #mc_embed_signup_scroll { width: 100% !important; }
   </style>
 </head>
 <body>
@@ -449,107 +495,244 @@
     </div>
 
     <!-- Form Panel -->
-    <div class="form-panel" id="formPanel">
-      <div id="formShell">
-        <p class="form-heading">Register Your Interest</p>
-        <span class="form-eyebrow">Be first to access exclusive offers at launch</span>
-        <div class="form-divider"></div>
+    <div class="form-panel">
+      <p class="form-heading">Register Your Interest</p>
+      <span class="form-eyebrow">Be first to access exclusive offers at launch</span>
+      <div class="form-divider"></div>
 
-        <form class="form" id="regForm" novalidate>
-          <div class="field-group">
-            <div class="row">
-              <div class="field">
-                <input class="field__input" type="text" id="fName" name="firstName"
-                       placeholder="First Name" required autocomplete="given-name">
-                <label class="field__label" for="fName">First Name</label>
-              </div>
-              <div class="field">
-                <input class="field__input" type="text" id="lName" name="lastName"
-                       placeholder="Last Name" required autocomplete="family-name">
-                <label class="field__label" for="lName">Last Name</label>
-              </div>
-            </div>
-            <div class="field field--full">
-              <input class="field__input" type="email" id="email" name="email"
-                     placeholder="Email Address" required autocomplete="email">
-              <label class="field__label" for="email">Email Address</label>
-            </div>
-            <div class="field field--full">
-              <input class="field__input" type="tel" id="phone" name="phone"
-                     placeholder="Phone Number" autocomplete="tel">
-              <label class="field__label" for="phone">Phone Number &nbsp;<span style="opacity:0.45;font-size:0.85em;letter-spacing:0">(optional)</span></label>
-            </div>
-          </div>
-          <label class="checkbox-label">
-            <input type="checkbox" class="checkbox-input" id="marketingConsent" name="marketingConsent">
-            <span class="checkbox-custom"></span>
-            <span class="checkbox-text">I agree to receive marketing emails</span>
-          </label>
-          <button type="submit" class="btn">Register Interest</button>
-        </form>
-      </div>
+      <!-- Mailchimp Embed (fields & JS kept true to origin) -->
+      <div id="mc_embed_shell">
+        <div id="mc_embed_signup">
+          <form action="https://hairrevival.us20.list-manage.com/subscribe/post?u=d9a770d6db71b9c3218e82a1f&amp;id=118670fe17&amp;f_id=0014cfe3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+            <div id="mc_embed_signup_scroll">
 
-      <!-- Success State -->
-      <div class="success" id="successState" role="status">
-        <svg class="success__icon" viewBox="0 0 50 50" fill="none" aria-hidden="true">
-          <circle cx="25" cy="25" r="24" stroke="#466060" stroke-width="0.75"/>
-          <path d="M14 25 L21 32 L36 17" stroke="#B1462E" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round"
-                stroke-dasharray="30" stroke-dashoffset="30">
-            <animate attributeName="stroke-dashoffset" from="30" to="0"
-                     dur="0.5s" fill="freeze"/>
-          </path>
-        </svg>
-        <p class="success__title">You're registered.</p>
-        <div class="success__rule"></div>
-        <p class="success__body">
-          We'll be in touch with early access<br>and exclusive offers before launch.
-        </p>
+              <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+
+              <!-- First Name + Last Name: side by side -->
+              <div class="mc-name-row">
+                <div class="mc-field-group">
+                  <label for="mce-FNAME">First Name <span class="asterisk">*</span></label>
+                  <input type="text" name="FNAME" class="required text" id="mce-FNAME" required="" value="">
+                </div>
+                <div class="mc-field-group">
+                  <label for="mce-LNAME">Last Name <span class="asterisk">*</span></label>
+                  <input type="text" name="LNAME" class="required text" id="mce-LNAME" required="" value="">
+                </div>
+              </div>
+
+              <div class="mc-field-group">
+                <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value="">
+              </div>
+
+              <div class="mc-field-group">
+                <label for="mce-PHONE">Phone Number</label>
+                <input type="text" name="PHONE" class="REQ_CSS" id="mce-PHONE" value="">
+              </div>
+
+              <!-- Mailchimp error / success -->
+              <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+              </div>
+
+              <!-- Honeypot (bot protection — do not remove) -->
+              <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                <input type="text" name="b_d9a770d6db71b9c3218e82a1f_118670fe17" tabindex="-1" value="">
+              </div>
+
+              <!-- Marketing consent -->
+              <label class="hr-checkbox-label">
+                <input type="checkbox" class="hr-checkbox-input" id="marketingConsent" name="marketingConsent">
+                <span class="hr-checkbox-custom"></span>
+                <span class="hr-checkbox-text">I agree to receive marketing emails</span>
+              </label>
+
+              <!-- Submit -->
+              <div class="clear">
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Register Interest">
+              </div>
+
+            </div>
+          </form>
+        </div>
       </div>
+      <!-- /Mailchimp -->
     </div>
 
     <p class="footer">&copy; 2025 Hair Revival. All rights reserved. &nbsp;·&nbsp; <a href="https://www.hairrevival.com.au" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(70,96,96,0.4);padding-bottom:1px;letter-spacing:inherit;" target="_blank" rel="noopener">hairrevival.com.au</a></p>
 
   </main>
 
-  <script>
-    (function () {
-      var form         = document.getElementById('regForm');
-      var formShell    = document.getElementById('formShell');
-      var successState = document.getElementById('successState');
-      var emailRe      = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  <!-- Mailchimp validation (kept true to origin) -->
+  <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+  <script type="text/javascript">
+    (function($) {
+      window.fnames = new Array(); window.ftypes = new Array();
+      fnames[0]='EMAIL'; ftypes[0]='email';
+      fnames[1]='FNAME'; ftypes[1]='text';
+      fnames[2]='LNAME'; ftypes[2]='text';
+      fnames[4]='PHONE'; ftypes[4]='phone';
+      fnames[3]='ADDRESS'; ftypes[3]='address';
+      fnames[5]='BIRTHDAY'; ftypes[5]='birthday';
+      fnames[6]='COMPANY'; ftypes[6]='text';
+    }(jQuery));
+    var $mcj = jQuery.noConflict(true);
 
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
+    // SMS Phone Multi-Country Functionality
+    if(!window.MC) { window.MC = {}; }
+    window.MC.smsPhoneData = {
+      defaultCountryCode: 'AU',
+      programs: [],
+      smsProgramDataCountryNames: []
+    };
 
-        var fn    = document.getElementById('fName').value.trim();
-        var ln    = document.getElementById('lName').value.trim();
-        var email = document.getElementById('email').value.trim();
+    function getCountryUnicodeFlag(countryCode) {
+      return countryCode.toUpperCase().replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397));
+    }
 
-        if (!fn)                  { document.getElementById('fName').focus();  return; }
-        if (!ln)                  { document.getElementById('lName').focus();  return; }
-        if (!emailRe.test(email)) { document.getElementById('email').focus();  return; }
+    function sanitizeHtml(str) {
+      if (typeof str !== 'string') return '';
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;').replace(/\//g,'&#x2F;');
+    }
 
-        formShell.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-        formShell.style.opacity    = '0';
-        formShell.style.transform  = 'translateY(8px)';
+    function sanitizeUrl(url) {
+      if (typeof url !== 'string') return '';
+      const t = url.trim().toLowerCase();
+      if (t.startsWith('javascript:') || t.startsWith('data:') || t.startsWith('vbscript:')) return '#';
+      return url;
+    }
 
-        setTimeout(function () {
-          formShell.style.display = 'none';
-          successState.classList.add('active');
-          successState.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-          successState.style.opacity    = '0';
-          successState.style.transform  = 'translateY(10px)';
+    const getBrowserLanguage = () => {
+      if (!window?.navigator?.language?.split('-')[1]) return window?.navigator?.language?.toUpperCase();
+      return window?.navigator?.language?.split('-')[1];
+    };
 
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              successState.style.opacity   = '1';
-              successState.style.transform = 'translateY(0)';
-            });
-          });
-        }, 370);
+    function getDefaultCountryProgram(defaultCountryCode, smsProgramData) {
+      if (!smsProgramData || smsProgramData.length === 0) return null;
+      const browserLanguage = getBrowserLanguage();
+      if (browserLanguage) {
+        const found = smsProgramData.find(p => p?.countryCode === browserLanguage);
+        if (found) return found;
+      }
+      if (defaultCountryCode) {
+        const found = smsProgramData.find(p => p?.countryCode === defaultCountryCode);
+        if (found) return found;
+      }
+      return smsProgramData[0];
+    }
+
+    function updateSmsLegalText(countryCode, fieldName) {
+      if (!countryCode || !fieldName) return;
+      const programs = window?.MC?.smsPhoneData?.programs;
+      if (!programs || !Array.isArray(programs)) return;
+      const program = programs.find(p => p?.countryCode === countryCode);
+      if (!program || !program.requiredTemplate) return;
+      const legalTextElement = document.querySelector('#legal-text-' + fieldName);
+      if (!legalTextElement) return;
+      const divRegex = new RegExp('</?[div][^>]*>', 'gi');
+      const template = program.requiredTemplate.replace(divRegex, '');
+      legalTextElement.textContent = '';
+      const parts = template.split(/(<a href=".*?" target=".*?">.*?<\/a>)/g);
+      parts.forEach(function(part) {
+        if (!part) return;
+        const anchorMatch = part.match(/<a href="(.*?)" target="(.*?)">(.*?)<\/a>/);
+        if (anchorMatch) {
+          const linkElement = document.createElement('a');
+          linkElement.href = sanitizeUrl(anchorMatch[1]);
+          linkElement.target = sanitizeHtml(anchorMatch[2]);
+          linkElement.textContent = sanitizeHtml(anchorMatch[3]);
+          legalTextElement.appendChild(linkElement);
+        } else {
+          legalTextElement.appendChild(document.createTextNode(part));
+        }
       });
-    }());
+    }
+
+    function generateDropdownOptions(smsProgramData) {
+      if (!smsProgramData || smsProgramData.length === 0) return '';
+      return smsProgramData.map(program => {
+        const flag = getCountryUnicodeFlag(program.countryCode);
+        const countryName = getCountryName(program.countryCode);
+        const callingCode = program.countryCallingCode || '';
+        return '<option value="' + sanitizeHtml(program.countryCode||'') + '">' + sanitizeHtml(countryName||'') + ' ' + sanitizeHtml(callingCode||'') + '</option>';
+      }).join('');
+    }
+
+    function getCountryName(countryCode) {
+      if (window.MC?.smsPhoneData?.smsProgramDataCountryNames && Array.isArray(window.MC.smsPhoneData.smsProgramDataCountryNames)) {
+        for (let i = 0; i < window.MC.smsPhoneData.smsProgramDataCountryNames.length; i++) {
+          if (window.MC.smsPhoneData.smsProgramDataCountryNames[i].code === countryCode) return window.MC.smsPhoneData.smsProgramDataCountryNames[i].name;
+        }
+      }
+      return countryCode;
+    }
+
+    function getDefaultPlaceholder(countryCode) {
+      var mockPlaceholders = [{countryCode:'US',placeholder:'+1 000 000 0000'},{countryCode:'GB',placeholder:'+44 0000 000000'},{countryCode:'CA',placeholder:'+1 000 000 0000'},{countryCode:'AU',placeholder:'+61 000 000 000'},{countryCode:'DE',placeholder:'+49 000 0000000'},{countryCode:'FR',placeholder:'+33 0 00 00 00 00'},{countryCode:'ES',placeholder:'+34 000 000 000'},{countryCode:'NZ',placeholder:'+64 00 000 0000'}];
+      if (!countryCode || typeof countryCode !== 'string') return mockPlaceholders[0].placeholder;
+      const selected = mockPlaceholders.find(item => item && item.countryCode === countryCode);
+      return selected ? selected.placeholder : mockPlaceholders[0].placeholder;
+    }
+
+    function updatePlaceholder(countryCode, fieldName) {
+      if (!countryCode || !fieldName) return;
+      const phoneInput = document.querySelector('#mce-' + fieldName);
+      if (!phoneInput) return;
+      const placeholder = getDefaultPlaceholder(countryCode);
+      if (placeholder) phoneInput.placeholder = placeholder;
+    }
+
+    function updateCountryCodeInstruction(countryCode, fieldName) { updatePlaceholder(countryCode, fieldName); }
+
+    function setDefaultHelpText(countryCode) {
+      const helpTextSpan = document.querySelector('#help-text');
+      if (!helpTextSpan) return;
+    }
+
+    function updateHelpTextCountryCode(countryCode, fieldName) {
+      if (!countryCode || !fieldName) return;
+      setDefaultHelpText(countryCode);
+    }
+
+    function initializeSmsPhoneDropdown(fieldName) {
+      if (!fieldName || typeof fieldName !== 'string') return;
+      const dropdown = document.querySelector('#country-select-' + fieldName);
+      const displayFlag = document.querySelector('#flag-display-' + fieldName);
+      if (!dropdown || !displayFlag) return;
+      const smsPhoneData = window.MC?.smsPhoneData;
+      if (smsPhoneData && smsPhoneData.programs && Array.isArray(smsPhoneData.programs)) {
+        dropdown.innerHTML = generateDropdownOptions(smsPhoneData.programs);
+      }
+      const defaultProgram = getDefaultCountryProgram(smsPhoneData?.defaultCountryCode, smsPhoneData?.programs);
+      if (defaultProgram && defaultProgram.countryCode) {
+        dropdown.value = defaultProgram.countryCode;
+        const flagSpan = displayFlag?.querySelector('#flag-emoji-' + fieldName);
+        if (flagSpan) { flagSpan.textContent = getCountryUnicodeFlag(defaultProgram.countryCode); flagSpan.setAttribute('aria-label', sanitizeHtml(defaultProgram.countryCode) + ' flag'); }
+        updateSmsLegalText(defaultProgram.countryCode, fieldName);
+        updatePlaceholder(defaultProgram.countryCode, fieldName);
+        updateCountryCodeInstruction(defaultProgram.countryCode, fieldName);
+      }
+      displayFlag?.addEventListener('click', function() { dropdown.focus(); });
+      dropdown?.addEventListener('change', function() {
+        const selectedCountry = this.value;
+        if (!selectedCountry || typeof selectedCountry !== 'string') return;
+        const flagSpan = displayFlag?.querySelector('#flag-emoji-' + fieldName);
+        if (flagSpan) { flagSpan.textContent = getCountryUnicodeFlag(selectedCountry); flagSpan.setAttribute('aria-label', sanitizeHtml(selectedCountry) + ' flag'); }
+        const selectedProgram = window.MC?.smsPhoneData?.programs.find(p => p && p.countryCode === selectedCountry);
+        updateSmsLegalText(selectedCountry, fieldName);
+        updatePlaceholder(selectedCountry, fieldName);
+        updateCountryCodeInstruction(selectedCountry, fieldName);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const smsPhoneFields = document.querySelectorAll('[id^="country-select-"]');
+      smsPhoneFields.forEach(function(dropdown) {
+        const fieldName = dropdown?.id.replace('country-select-', '');
+        initializeSmsPhoneDropdown(fieldName);
+      });
+    });
   </script>
 
 </body>
