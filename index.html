@@ -61,16 +61,17 @@
     .page {
       position: relative; z-index: 1;
       min-height: 100vh;
+      min-height: 100dvh; /* respects real browser chrome on mobile */
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      padding: 80px 24px;
+      padding: 32px 24px;
     }
 
     /* ── Hero block ── */
     .hero {
       max-width: 720px; width: 100%;
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 28px;
     }
 
     /* ── Coming Soon Badge ── */
@@ -81,7 +82,7 @@
       font-family: 'Poppins', sans-serif; font-weight: 500;
       font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--text-support);
-      margin-bottom: 52px;
+      margin-bottom: 20px;
       opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
     }
     .badge__dot {
@@ -100,12 +101,12 @@
 
     /* ── Wordmark ── */
     .wordmark {
-      margin-bottom: 36px;
+      margin-bottom: 20px;
       opacity: 0; animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.25s forwards;
     }
     .wordmark__name {
       font-family: 'Unna', 'Lora', serif; font-weight: 700;
-      font-size: clamp(72px, 14vw, 128px);
+      font-size: clamp(52px, 11vw, 96px);
       line-height: 0.90; letter-spacing: -0.02em;
       color: var(--mist); display: block;
       font-optical-sizing: auto;
@@ -114,7 +115,7 @@
     .wordmark__rule {
       width: 100%; height: 1px;
       background: linear-gradient(to right, transparent, rgba(212,224,224,0.4), transparent);
-      margin: 20px 0 12px;
+      margin: 12px 0 8px;
     }
     .wordmark__descriptor {
       font-family: 'Poppins', sans-serif; font-weight: 400;
@@ -165,7 +166,7 @@
       background: rgba(10, 17, 17, 0.82);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      padding: 40px 36px 36px;
+      padding: 22px 24px 20px;
       box-shadow:
         0 32px 64px rgba(0,0,0,0.5),
         0 0 0 1px rgba(70,96,96,0.12) inset,
@@ -175,29 +176,29 @@
 
     .form-heading {
       font-family: 'Lora', serif; font-weight: 700;
-      font-size: 20px; letter-spacing: -0.02em;
+      font-size: 17px; letter-spacing: -0.02em;
       color: var(--mist);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .form-eyebrow {
       font-family: 'Poppins', sans-serif; font-weight: 400;
       font-size: 11px;
       color: var(--text-support);
-      margin-bottom: 28px; display: block;
+      margin-bottom: 14px; display: block;
       line-height: 1.5;
     }
 
     .form-divider {
       width: 32px; height: 1px;
       background: var(--terra-rust);
-      margin-bottom: 28px;
+      margin-bottom: 14px;
     }
 
     /* ── Marketing Consent Checkbox ── */
     .hr-checkbox-label {
       display: flex; align-items: center; gap: 12px;
-      margin-top: 16px; cursor: pointer;
+      margin-top: 10px; cursor: pointer;
     }
     .hr-checkbox-input { display: none; }
     .hr-checkbox-custom {
@@ -229,7 +230,7 @@
 
     /* ── Footer ── */
     .footer {
-      margin-top: 52px;
+      margin-top: 20px;
       font-family: 'Poppins', sans-serif; font-weight: 300;
       font-size: 9px; letter-spacing: 0.14em; color: var(--text-dim);
       opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
@@ -246,10 +247,49 @@
       to   { opacity: 1; }
     }
 
-    /* ── Responsive ── */
+    /* ── Responsive / Mobile ── */
     @media (max-width: 600px) {
-      .form-panel { padding: 28px 20px 24px; }
-      .mc-name-row { grid-template-columns: 1fr !important; }
+      /* Layout */
+      .page { padding: 12px 16px 12px; }
+      .hero { margin-bottom: 10px; }
+
+      /* Badge */
+      .badge { margin-bottom: 8px; padding: 5px 14px 5px 10px; font-size: 8px; }
+
+      /* Wordmark — single line, compact */
+      .wordmark { margin-bottom: 8px !important; }
+      .wordmark__name {
+        font-size: 38px !important;
+        display: block !important;
+      }
+      /* Hide the line-break so Hair Revival sits on one line */
+      .wordmark__name br { display: none !important; }
+      .wordmark__rule { margin: 8px 0 5px !important; }
+      .wordmark__descriptor { font-size: 8px !important; letter-spacing: 0.28em !important; }
+
+      /* Form panel */
+      .form-panel { padding: 12px 16px 10px; }
+      .form-heading { font-size: 14px; margin-bottom: 2px; }
+      .form-eyebrow { font-size: 10px; margin-bottom: 6px; }
+      .form-divider { margin-bottom: 6px; }
+
+      /* Mailchimp fields */
+      .mc-name-row { gap: 6px; margin-bottom: 6px; }
+
+      #mc_embed_signup .indicates-required { display: none !important; }
+      #mc_embed_signup .mc-field-group { margin-bottom: 5px !important; }
+      #mc_embed_signup .mc-field-group label { margin-bottom: 3px !important; font-size: 7.5px !important; }
+      #mc_embed_signup .mc-field-group input[type="email"],
+      #mc_embed_signup .mc-field-group input[type="text"] { padding: 6px 10px !important; font-size: 12px !important; }
+      #mc_embed_signup .clear { margin-top: 8px !important; }
+      #mc_embed_signup .clear input#mc-embedded-subscribe {
+        padding: 10px 24px !important;
+        line-height: 1 !important;
+        font-size: 9px !important;
+      }
+      .hr-checkbox-label { margin-top: 7px; }
+
+      .footer { margin-top: 8px; font-size: 8px; }
     }
 
     /* ══════════════════════════════════════════
@@ -275,7 +315,7 @@
       font-size: 9.5px !important;
       letter-spacing: 0.10em !important;
       color: var(--text-dim) !important;
-      margin: 0 0 16px !important;
+      margin: 0 0 10px !important;
       text-align: right !important;
     }
     #mc_embed_signup .indicates-required .asterisk,
@@ -288,7 +328,7 @@
       width: 100% !important;
       padding-bottom: 0 !important;
       min-height: unset !important;
-      margin-bottom: 12px !important;
+      margin-bottom: 8px !important;
     }
 
     /* Labels */
@@ -310,9 +350,9 @@
       background: rgba(212,224,224,0.03) !important;
       border: 1px solid rgba(70,96,96,0.30) !important;
       border-radius: 0 !important;
-      padding: 12px 16px !important;
+      padding: 9px 12px !important;
       font-family: 'Poppins', sans-serif !important;
-      font-size: 13.5px !important;
+      font-size: 12px !important;
       font-weight: 300 !important;
       color: var(--mist) !important;
       outline: none !important;
@@ -334,8 +374,8 @@
     .mc-name-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 8px;
+      margin-bottom: 8px;
     }
     .mc-name-row .mc-field-group { margin-bottom: 0 !important; }
 
@@ -343,14 +383,14 @@
     #mc_embed_signup .clear {
       width: 100% !important;
       float: none !important;
-      margin-top: 16px !important;
+      margin-top: 10px !important;
     }
     #mc_embed_signup .clear input#mc-embedded-subscribe {
       background: var(--terra-rust) !important;
       border: none !important;
       border-radius: 0 !important;
       width: 100% !important;
-      padding: 17px 24px !important;
+      padding: 13px 24px !important;
       font-family: 'Poppins', sans-serif !important;
       font-weight: 500 !important;
       font-size: 10px !important;
@@ -417,7 +457,7 @@
       </div>
 
       <div class="wordmark" role="banner">
-        <span class="wordmark__name">Hair<br>Revival</span>
+        <span class="wordmark__name">Hair <br>Revival</span>
         <div class="wordmark__rule"></div>
         <span class="wordmark__descriptor">Elite&nbsp;&nbsp;Haircare&nbsp;&nbsp;for&nbsp;&nbsp;Men</span>
       </div>
