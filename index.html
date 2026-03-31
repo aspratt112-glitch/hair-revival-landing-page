@@ -669,6 +669,16 @@
         const fieldName = dropdown?.id.replace('country-select-', '');
         initializeSmsPhoneDropdown(fieldName);
       });
+
+      // Override Mailchimp success message with custom text
+      const successDiv = document.getElementById('mce-success-response');
+      if (successDiv) {
+        new MutationObserver(function() {
+          if (successDiv.style.display !== 'none' && successDiv.innerHTML.trim() !== '') {
+            successDiv.innerHTML = "Awesome, we'll keep you in the know!";
+          }
+        }).observe(successDiv, { attributes: true, childList: true, subtree: true });
+      }
     });
   </script>
 
