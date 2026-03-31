@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hair Revival — Elite Haircare for Men</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Unna:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Brand Tokens ── */
+    :root {
+      --deep-fern:    #1D2828;
+      --teal-forest:  #466060;
+      --mist:         #D4E0E0;
+      --terra-rust:   #B1462E;
+      --burnt-umber:  #471C13;
+
+      --bg:           #161F1F;
+      --bg-panel:     rgba(12, 19, 19, 0.72);
+      --text:         var(--mist);
+      --text-support: #8aacac;
+      --text-dim:     #456060;
+      --border:       rgba(70, 96, 96, 0.4);
+      --border-dim:   rgba(70, 96, 96, 0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ── Background image layer ── */
+    .bg-image {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      z-index: 0;
+    }
+
+    /* ── Overlay ── */
+    .bg-overlay {
+      position: fixed; inset: 0;
+      background: rgba(22,31,31,0.75);
+      pointer-events: none; z-index: 1;
+    }
+
+    /* ── Vertical grid lines ── */
+    .grid-lines {
+      position: fixed; inset: 0;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      pointer-events: none; z-index: 2;
+    }
+    .grid-lines span { border-right: 1px solid rgba(70,96,96,0.08); }
+    .grid-lines span:last-child { border-right: none; }
+
+    /* ── Corner marks ── */
+    .corner {
+      position: fixed; width: 40px; height: 40px;
+      pointer-events: none; z-index: 2;
+      opacity: 0; animation: fadeIn 1s ease 1.2s forwards;
+    }
+    .corner--tl { top: 28px; left: 28px; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+    .corner--tr { top: 28px; right: 28px; border-top: 1px solid var(--border); border-right: 1px solid var(--border); }
+    .corner--bl { bottom: 28px; left: 28px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); }
+    .corner--br { bottom: 28px; right: 28px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+
+    /* ── Side captions ── */
+    .side-caption {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      pointer-events: none; z-index: 2;
+      opacity: 0; animation: fadeIn 1s ease 1.4s forwards;
+    }
+    .side-caption--l { left: 30px; }
+    .side-caption--r { right: 30px; }
+    .side-caption__text {
+      font-family: 'Poppins', sans-serif; font-weight: 400;
+      font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--text-dim); writing-mode: vertical-rl;
+    }
+    .side-caption__line {
+      width: 1px; height: 64px;
+      background: linear-gradient(to bottom, transparent, var(--text-dim), transparent);
+    }
+
+    /* ── Page ── */
+    .page {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 80px 24px;
+    }
+
+    /* ── Hero block ── */
+    .hero {
+      max-width: 720px; width: 100%;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    /* ── Coming Soon Badge ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid var(--border);
+      padding: 6px 18px 6px 12px;
+      font-family: 'Poppins', sans-serif; font-weight: 500;
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-support);
+      margin-bottom: 52px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+    .badge__dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--terra-rust); flex-shrink: 0; position: relative;
+    }
+    .badge__dot::after {
+      content: ''; position: absolute; inset: -3px; border-radius: 50%;
+      background: var(--terra-rust); opacity: 0.4;
+      animation: pulse 2.8s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 0.4; }
+      50%      { transform: scale(2.5); opacity: 0; }
+    }
+
+    /* ── Wordmark ── */
+    .wordmark {
+      margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.25s forwards;
+    }
+    .wordmark__name {
+      font-family: 'Unna', 'Lora', serif; font-weight: 700;
+      font-size: clamp(72px, 14vw, 128px);
+      line-height: 0.90; letter-spacing: -0.02em;
+      color: var(--mist); display: block;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wordmark__rule {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,224,224,0.4), transparent);
+      margin: 20px 0 12px;
+    }
+    .wordmark__descriptor {
+      font-family: 'Poppins', sans-serif; font-weight: 400;
+      font-size: 10px; letter-spacing: 0.38em;
+      text-transform: uppercase; color: var(--terra-rust);
+      display: block;
+    }
+
+    /* ── Tagline ── */
+    .tagline {
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .tagline__line {
+      display: block;
+      font-family: 'Lora', serif;
+      line-height: 1.2;
+    }
+    .tagline__line--1 {
+      font-size: clamp(13px, 1.4vw, 15px);
+      font-weight: 400; font-style: italic;
+      letter-spacing: 0.12em;
+      color: var(--text-support);
+      text-transform: none;
+    }
+    .tagline__line--2 {
+      font-size: clamp(28px, 4.5vw, 46px);
+      font-weight: 700; font-style: normal;
+      letter-spacing: -0.02em;
+      color: var(--mist);
+      margin: 6px 0 4px;
+    }
+    .tagline__line--3 {
+      font-size: clamp(11px, 1.2vw, 13px);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400; font-style: normal;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--terra-rust);
+    }
+    .tagline__divider {
+      display: none;
+    }
+
+    /* ── Form Panel ── */
+    .form-panel {
+      width: 100%; max-width: 440px;
+      border: 1px solid rgba(70,96,96,0.5);
+      border-top: 2px solid var(--terra-rust);
+      background: rgba(10, 17, 17, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 40px 36px 36px;
+      box-shadow:
+        0 32px 64px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(70,96,96,0.12) inset,
+        0 1px 0 rgba(212,224,224,0.06) inset;
+      opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+
+    .form-heading {
+      font-family: 'Lora', serif; font-weight: 700;
+      font-size: 20px; letter-spacing: -0.02em;
+      color: var(--mist);
+      margin-bottom: 4px;
+    }
+
+    .form-eyebrow {
+      font-family: 'Poppins', sans-serif; font-weight: 400;
+      font-size: 11px;
+      color: var(--text-support);
+      margin-bottom: 28px; display: block;
+      line-height: 1.5;
+    }
+
+    .form-divider {
+      width: 32px; height: 1px;
+      background: var(--terra-rust);
+      margin-bottom: 28px;
+    }
+
+    .form { display: flex; flex-direction: column; gap: 1px; }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
+
+    .field {
+      position: relative;
+      background: rgba(212,224,224,0.03);
+      border: 1px solid rgba(70,96,96,0.25);
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .row .field { border: none; background: rgba(212,224,224,0.03); }
+    .field--full { border-top: none; }
+    .field:focus-within { background: rgba(70,96,96,0.10); z-index: 1; }
+
+    .field__label {
+      position: absolute; top: 15px; left: 16px;
+      font-family: 'Poppins', sans-serif; font-weight: 500;
+      font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(138,172,172,0.5); pointer-events: none;
+      transition: top 0.18s ease, font-size 0.18s ease, color 0.18s ease;
+    }
+    .field__input {
+      width: 100%; background: transparent; border: none; outline: none;
+      padding: 28px 16px 11px;
+      font-family: 'Poppins', sans-serif; font-weight: 300;
+      font-size: 14px; color: var(--mist);
+    }
+    .field__input::placeholder { color: transparent; }
+    .field__input:focus          ~ .field__label,
+    .field__input:not(:placeholder-shown) ~ .field__label {
+      top: 8px; font-size: 7.5px; color: var(--teal-forest);
+    }
+
+    /* Wrap the field group in a subtle outer border */
+    .field-group {
+      border: 1px solid rgba(70,96,96,0.25);
+      display: flex; flex-direction: column; gap: 1px;
+      background: rgba(70,96,96,0.25);
+      overflow: hidden;
+    }
+    .field-group .row { gap: 1px; }
+    .field-group .field { border: none; }
+    .field-group .field--full { border-top: none; }
+
+    /* Terra Rust focus indicator */
+    .field::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px; background: var(--terra-rust);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .field:focus-within::after { transform: scaleX(1); }
+
+    /* ── CTA ── */
+    .btn {
+      width: 100%; padding: 18px 24px; margin-top: 16px;
+      background: var(--terra-rust); border: none; cursor: pointer;
+      font-family: 'Poppins', sans-serif; font-weight: 500;
+      font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--mist);
+      position: relative; overflow: hidden;
+      transition: background 0.3s ease, letter-spacing 0.3s ease;
+      box-shadow: 0 4px 24px rgba(177,70,46,0.3);
+    }
+    .btn::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212,224,224,0.12), transparent);
+      transition: left 0.55s ease;
+    }
+    .btn:hover { background: #c44f35; letter-spacing: 0.32em; }
+    .btn:hover::before { left: 100%; }
+    .btn:active { transform: scale(0.99); }
+
+    /* ── Success ── */
+    .success {
+      display: none;
+      flex-direction: column; align-items: center; gap: 18px;
+      text-align: center;
+    }
+    .success.active { display: flex; }
+
+    .success__icon { width: 50px; height: 50px; }
+
+    .success__title {
+      font-family: 'Lora', serif;
+      font-weight: 700; font-size: 26px; letter-spacing: -0.02em;
+      color: var(--mist);
+    }
+    .success__rule { width: 36px; height: 1px; background: var(--border); }
+    .success__body {
+      font-family: 'Lora', serif;
+      font-size: 16px; font-style: italic; font-weight: 400;
+      color: var(--text-support); line-height: 1.7;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 52px;
+      font-family: 'Poppins', sans-serif; font-weight: 300;
+      font-size: 9px; letter-spacing: 0.14em; color: var(--text-dim);
+      opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+      text-align: center;
+    }
+
+    /* ── Keyframes ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .side-caption { display: none; }
+      .corner { width: 24px; height: 24px; }
+      .corner--tl { top: 16px; left: 16px; }
+      .corner--tr { top: 16px; right: 16px; }
+      .corner--bl { bottom: 16px; left: 16px; }
+      .corner--br { bottom: 16px; right: 16px; }
+
+      .form-panel { padding: 28px 20px 24px; }
+
+      .row { grid-template-columns: 1fr; }
+      .row .field:first-child {
+        border-right-color: var(--border-dim);
+        border-bottom-color: transparent;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <img class="bg-image" src="hero-lakeside.png" alt="" aria-hidden="true">
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <div class="grid-lines" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="corner corner--tl"></div>
+  <div class="corner corner--tr"></div>
+  <div class="corner corner--bl"></div>
+  <div class="corner corner--br"></div>
+
+  <div class="side-caption side-caption--l" aria-hidden="true">
+    <div class="side-caption__line"></div>
+    <span class="side-caption__text">Est. 2025</span>
+    <div class="side-caption__line"></div>
+  </div>
+  <div class="side-caption side-caption--r" aria-hidden="true">
+    <div class="side-caption__line"></div>
+    <span class="side-caption__text">Science&#8209;Backed</span>
+    <div class="side-caption__line"></div>
+  </div>
+
+  <main class="page">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="badge">
+        <span class="badge__dot"></span>
+        Coming Soon
+      </div>
+
+      <div class="wordmark" role="banner">
+        <span class="wordmark__name">Hair<br>Revival</span>
+        <div class="wordmark__rule"></div>
+        <span class="wordmark__descriptor">Elite&nbsp;&nbsp;Haircare&nbsp;&nbsp;for&nbsp;&nbsp;Men</span>
+      </div>
+
+      <div class="tagline">
+        <span class="tagline__line tagline__line--1">12 Month System</span>
+        <span class="tagline__divider" aria-hidden="true"></span>
+        <span class="tagline__line tagline__line--2">Delivered to you Monthly</span>
+        <span class="tagline__divider" aria-hidden="true"></span>
+        <span class="tagline__line tagline__line--3">Giving you control of your Hair</span>
+      </div>
+    </div>
+
+    <!-- Form Panel -->
+    <div class="form-panel" id="formPanel">
+      <div id="formShell">
+        <p class="form-heading">Register Your Interest</p>
+        <span class="form-eyebrow">Be first to access exclusive offers at launch</span>
+        <div class="form-divider"></div>
+
+        <form class="form" id="regForm" novalidate>
+          <div class="field-group">
+            <div class="row">
+              <div class="field">
+                <input class="field__input" type="text" id="fName" name="firstName"
+                       placeholder="First Name" required autocomplete="given-name">
+                <label class="field__label" for="fName">First Name</label>
+              </div>
+              <div class="field">
+                <input class="field__input" type="text" id="lName" name="lastName"
+                       placeholder="Last Name" required autocomplete="family-name">
+                <label class="field__label" for="lName">Last Name</label>
+              </div>
+            </div>
+            <div class="field field--full">
+              <input class="field__input" type="email" id="email" name="email"
+                     placeholder="Email Address" required autocomplete="email">
+              <label class="field__label" for="email">Email Address</label>
+            </div>
+            <div class="field field--full">
+              <input class="field__input" type="tel" id="phone" name="phone"
+                     placeholder="Phone Number" autocomplete="tel">
+              <label class="field__label" for="phone">Phone Number &nbsp;<span style="opacity:0.45;font-size:0.85em;letter-spacing:0">(optional)</span></label>
+            </div>
+          </div>
+          <button type="submit" class="btn">Register Interest</button>
+        </form>
+      </div>
+
+      <!-- Success State -->
+      <div class="success" id="successState" role="status">
+        <svg class="success__icon" viewBox="0 0 50 50" fill="none" aria-hidden="true">
+          <circle cx="25" cy="25" r="24" stroke="#466060" stroke-width="0.75"/>
+          <path d="M14 25 L21 32 L36 17" stroke="#B1462E" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"
+                stroke-dasharray="30" stroke-dashoffset="30">
+            <animate attributeName="stroke-dashoffset" from="30" to="0"
+                     dur="0.5s" fill="freeze"/>
+          </path>
+        </svg>
+        <p class="success__title">You're registered.</p>
+        <div class="success__rule"></div>
+        <p class="success__body">
+          We'll be in touch with early access<br>and exclusive offers before launch.
+        </p>
+      </div>
+    </div>
+
+    <p class="footer">&copy; 2025 Hair Revival. All rights reserved. &nbsp;·&nbsp; <a href="https://www.hairrevival.com.au" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(70,96,96,0.4);padding-bottom:1px;letter-spacing:inherit;" target="_blank" rel="noopener">hairrevival.com.au</a></p>
+
+  </main>
+
+  <script>
+    (function () {
+      var form         = document.getElementById('regForm');
+      var formShell    = document.getElementById('formShell');
+      var successState = document.getElementById('successState');
+      var emailRe      = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var fn    = document.getElementById('fName').value.trim();
+        var ln    = document.getElementById('lName').value.trim();
+        var email = document.getElementById('email').value.trim();
+
+        if (!fn)                  { document.getElementById('fName').focus();  return; }
+        if (!ln)                  { document.getElementById('lName').focus();  return; }
+        if (!emailRe.test(email)) { document.getElementById('email').focus();  return; }
+
+        formShell.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+        formShell.style.opacity    = '0';
+        formShell.style.transform  = 'translateY(8px)';
+
+        setTimeout(function () {
+          formShell.style.display = 'none';
+          successState.classList.add('active');
+          successState.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          successState.style.opacity    = '0';
+          successState.style.transform  = 'translateY(10px)';
+
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              successState.style.opacity   = '1';
+              successState.style.transform = 'translateY(0)';
+            });
+          });
+        }, 370);
+      });
+    }());
+  </script>
+
+</body>
+</html>
