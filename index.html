@@ -56,44 +56,6 @@
       pointer-events: none; z-index: 1;
     }
 
-    /* ── Vertical grid lines ── */
-    .grid-lines {
-      position: fixed; inset: 0;
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      pointer-events: none; z-index: 2;
-    }
-    .grid-lines span { border-right: 1px solid rgba(70,96,96,0.08); }
-    .grid-lines span:last-child { border-right: none; }
-
-    /* ── Corner marks ── */
-    .corner {
-      position: fixed; width: 40px; height: 40px;
-      pointer-events: none; z-index: 2;
-      opacity: 0; animation: fadeIn 1s ease 1.2s forwards;
-    }
-    .corner--tl { top: 28px; left: 28px; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
-    .corner--tr { top: 28px; right: 28px; border-top: 1px solid var(--border); border-right: 1px solid var(--border); }
-    .corner--bl { bottom: 28px; left: 28px; border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); }
-    .corner--br { bottom: 28px; right: 28px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
-
-    /* ── Side captions ── */
-    .side-caption {
-      position: fixed; top: 50%; transform: translateY(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 16px;
-      pointer-events: none; z-index: 2;
-      opacity: 0; animation: fadeIn 1s ease 1.4s forwards;
-    }
-    .side-caption--l { left: 30px; }
-    .side-caption--r { right: 30px; }
-    .side-caption__text {
-      font-family: 'Poppins', sans-serif; font-weight: 400;
-      font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--text-dim); writing-mode: vertical-rl;
-    }
-    .side-caption__line {
-      width: 1px; height: 64px;
-      background: linear-gradient(to bottom, transparent, var(--text-dim), transparent);
-    }
 
     /* ── Page ── */
     .page {
@@ -286,12 +248,6 @@
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
-      .side-caption { display: none; }
-      .corner { width: 24px; height: 24px; }
-      .corner--tl { top: 16px; left: 16px; }
-      .corner--tr { top: 16px; right: 16px; }
-      .corner--bl { bottom: 16px; left: 16px; }
-      .corner--br { bottom: 16px; right: 16px; }
       .form-panel { padding: 28px 20px 24px; }
       .mc-name-row { grid-template-columns: 1fr !important; }
     }
@@ -450,25 +406,6 @@
   <img class="bg-image" src="hero-lakeside.png" alt="" aria-hidden="true">
   <div class="bg-overlay" aria-hidden="true"></div>
 
-  <div class="grid-lines" aria-hidden="true">
-    <span></span><span></span><span></span>
-  </div>
-
-  <div class="corner corner--tl"></div>
-  <div class="corner corner--tr"></div>
-  <div class="corner corner--bl"></div>
-  <div class="corner corner--br"></div>
-
-  <div class="side-caption side-caption--l" aria-hidden="true">
-    <div class="side-caption__line"></div>
-    <span class="side-caption__text">Est. 2025</span>
-    <div class="side-caption__line"></div>
-  </div>
-  <div class="side-caption side-caption--r" aria-hidden="true">
-    <div class="side-caption__line"></div>
-    <span class="side-caption__text">Science&#8209;Backed</span>
-    <div class="side-caption__line"></div>
-  </div>
 
   <main class="page">
 
