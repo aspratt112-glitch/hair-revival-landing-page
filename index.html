@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elyon — Elite Haircare for Men</title>
+  <title id="page-title">Elyon — Elite Haircare for Men</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Unna:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -679,16 +679,16 @@
         <span class="badge__line badge__line--l"></span>
         <span class="badge__inner">
           <span class="badge__dot"></span>
-          Coming Soon
+          <span id="copy-badge">Coming Soon</span>
         </span>
         <span class="badge__line badge__line--r"></span>
       </div>
 
       <!-- Wordmark: Elyon primary / Hair Revival sub-brand -->
       <div class="wordmark" role="banner">
-        <span class="wordmark__name">Elyon</span>
+        <span class="wordmark__name" id="copy-brand">Elyon</span>
         <div class="wordmark-rule"></div>
-        <span class="descriptor">Hair Science For Men Who Want Results</span>
+        <span class="descriptor" id="copy-descriptor">Hair Science For Men Who Want Results</span>
       </div>
 
     </div>
@@ -703,8 +703,8 @@
         <span class="corner corner--bl"></span>
         <span class="corner corner--br"></span>
 
-        <p class="form-heading">Join the founders club</p>
-        <span class="form-eyebrow">Be the first to get exclusive access</span>
+        <p class="form-heading" id="copy-form-heading">Join the founders club</p>
+        <span class="form-eyebrow" id="copy-form-sub">Be the first to get exclusive access</span>
         <div class="form-divider"></div>
 
         <!-- Mailchimp embed — fields & JS kept true to origin -->
@@ -752,7 +752,7 @@
                 <label class="hr-checkbox-label">
                   <input type="checkbox" class="hr-checkbox-input" id="marketingConsent" name="marketingConsent">
                   <span class="hr-checkbox-custom"></span>
-                  <span class="hr-checkbox-text">I agree to receive marketing emails</span>
+                  <span class="hr-checkbox-text" id="copy-consent">I agree to receive marketing emails</span>
                 </label>
 
                 <!-- Submit -->
@@ -767,7 +767,7 @@
         <!-- /Mailchimp -->
       </div>
 
-      <span class="tagline">Not Guesswork. Science.</span>
+      <span class="tagline" id="copy-tagline">Not Guesswork. Science.</span>
 
       <!-- ── Founder Products Section ── -->
       <div class="products-section">
@@ -815,11 +815,61 @@
         <p class="products-footnote">Founder pricing available to early registrants only.</p>
       </div>
 
-      <p class="footer">&copy; 2025 Elyon. All rights reserved. &nbsp;·&nbsp; <a href="https://www.elyonlabs.com.au" target="_blank" rel="noopener">elyonlabs.com.au</a></p>
+      <p class="footer"><span id="copy-footer">&copy; 2025 Elyon. All rights reserved.</span> &nbsp;·&nbsp; <a id="copy-footer-link" href="https://www.elyonlabs.com.au" target="_blank" rel="noopener">elyonlabs.com.au</a></p>
 
     </div>
 
   </main>
+
+  <!-- ================================================================
+       ✏️  CONTENT — edit your copy here, no HTML knowledge needed
+       ================================================================ -->
+  <script>
+    const CONTENT = {
+
+      // Browser tab title
+      pageTitle:     "Elyon — Elite Haircare for Men",
+
+      // Hero
+      badge:         "Coming Soon",
+      brandName:     "Elyon",
+      descriptor:    "Hair Science For Men Who Want Results",
+
+      // Form panel
+      formHeading:   "Join the founders club",
+      formSub:       "Be the first to get exclusive access",
+      consentLabel:  "I agree to receive marketing emails",
+      buttonText:    "Register Interest",
+
+      // Below form
+      tagline:       "Not Guesswork. Science.",
+
+      // Footer
+      footerText:    "© 2025 Elyon. All rights reserved.",
+      footerLinkUrl: "https://www.elyonlabs.com.au",
+      footerLinkLabel: "elyonlabs.com.au",
+
+    };
+
+    // ── Wires CONTENT values into the page — do not edit below this line ──
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('page-title').textContent      = CONTENT.pageTitle;
+      document.getElementById('copy-badge').textContent      = CONTENT.badge;
+      document.getElementById('copy-brand').textContent      = CONTENT.brandName;
+      document.getElementById('copy-descriptor').textContent = CONTENT.descriptor;
+      document.getElementById('copy-form-heading').textContent = CONTENT.formHeading;
+      document.getElementById('copy-form-sub').textContent   = CONTENT.formSub;
+      document.getElementById('copy-consent').textContent    = CONTENT.consentLabel;
+      document.getElementById('copy-tagline').textContent    = CONTENT.tagline;
+      document.getElementById('copy-footer').textContent     = CONTENT.footerText;
+      document.getElementById('copy-footer-link').textContent = CONTENT.footerLinkLabel;
+      document.getElementById('copy-footer-link').href       = CONTENT.footerLinkUrl;
+      // Button value (Mailchimp input)
+      var btn = document.getElementById('mc-embedded-subscribe');
+      if (btn) btn.value = CONTENT.buttonText;
+    });
+  </script>
+  <!-- ================================================================ -->
 
   <!-- Mailchimp validation (kept true to origin) -->
   <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
